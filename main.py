@@ -1,5 +1,6 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTextEdit, QStackedWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QStackedWidget
+from PyQt5.QtCore import Qt
 import LaberryO.GlobalUtils
 import LaberryO.Pages
 # main loop
@@ -25,6 +26,9 @@ class Main(QMainWindow):
         self.stack.addWidget(self.rand_page) # index 1
 
         self.stack.setCurrentIndex(0)
+
+        for btn in self.findChildren(QPushButton):
+            btn.setCursor(Qt.PointingHandCursor)
 
 def load_stylesheet(app):
     try:

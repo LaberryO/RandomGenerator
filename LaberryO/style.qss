@@ -2,11 +2,11 @@
 
 QPushButton {
     background-color: white;
-    border: 5px solid black;
-    border-radius: 30px;
+    border: 1px solid black;
+    border-radius: 5px;
     padding: 10px;
 }
 
-QPushButton:hover {
+QPushButton#active {
     background-color: aqua;
 }
