@@ -1,5 +1,5 @@
 # private data
-user_data.csv
+user_list.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
