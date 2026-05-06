@@ -6,6 +6,7 @@ class RandGen:
         self.user_list = []
         self.select_list = []
         self.select_amount = 0
+        self.column_name = ""
         
     def loadScreen(self):
         self.insertAmount()
@@ -53,7 +54,9 @@ class RandGen:
             print(" | ".join(header))
             while True:
                 data = str(input("사용자명이 들어있는 칼럼명을 입력하세요: "))
-                if data in header: break
+                if data in header: 
+                    self.column_name = data
+                    break
                 else: continue
             self.user_list = pd.read_csv(path, usecols=[data]).iloc[:, 0].tolist()
             return True
