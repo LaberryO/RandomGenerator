@@ -8,6 +8,7 @@ class RandGen:
         self.select_amount = 0
         
     def loadScreen(self):
+        self.insertAmount()
         self.root = tk.Tk()
         self.root.title("Random Generator")
         self.root.geometry("600x400")
@@ -29,7 +30,7 @@ class RandGen:
 
         # right
         top_right = tk.LabelFrame(r_frame, text=f"당첨자 {self.select_amount}인", pady=5)
-        top_right.pack(side="top", fill="both", expand=True, pady=(0, 10))
+        top_right.pack(side="top", fill="both", expand=True, padx=10, pady=(0, 10))
         self.select_listbox = tk.Listbox(top_right, yscrollcommand=scrollbar.set)
         self.select_listbox.pack(side="left", fill="both", expand=True)
         self.select_listbox.insert("end", "비어 있습니다.")
@@ -48,27 +49,30 @@ class RandGen:
         path = "user_list.csv"
         if os.path.exists(path):
             header = pd.read_csv(path, nrows=0).columns.tolist()
+            print("| ", end="")
             print(" | ".join(header))
             while True:
                 data = str(input("사용자명이 들어있는 칼럼명을 입력하세요: "))
                 if data in header: break
                 else: continue
             self.user_list = pd.read_csv(path, usecols=[data]).iloc[:, 0].tolist()
+            return True
         else:
             return False
 
     def insertData(self):
         while True:
             data = str(input("사용자명을 입력하세요. (미 입력시 입력 종료): "))
-            if not data: 
-                while True:
-                    i = input("추첨할 인원을 입력하세요: ")
-                    if i.isdigit():
-                        self.select_amount = int(i)
-                        break
-                break
+            if not data: break
             self.user_list.append(data)
         return self.user_list
+    
+    def insertAmount(self):
+        while True:
+            data = input("추첨할 인원을 입력하세요: ")
+            if data.isdigit():
+                self.select_amount = int(data)
+                break
     
     def random(self):
         self.select_list = []            
